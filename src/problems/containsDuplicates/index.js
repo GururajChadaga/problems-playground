@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var containsDuplicate = function (nums) {
+const containsDuplicate = function (nums) {
   const numSet = new Set();
   for (let value of nums) {
     if (numSet.has(value)) return true;
