@@ -5,10 +5,9 @@
  */
 const search = function (nums, target) {
   let left = 0,
-    right = nums.length - 1,
-    mid;
+    right = nums.length - 1;
   while (right >= left) {
-    mid = parseInt((left + right) / 2);
+    const mid = parseInt((left + right) / 2);
     if (nums[mid] === target) return mid;
     // mid is part of left sorted array
     if (nums[mid] >= nums[left]) {
