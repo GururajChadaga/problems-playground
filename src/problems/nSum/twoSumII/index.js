@@ -6,7 +6,7 @@
 const twoSumII = function (numbers, target) {
   let left = 0,
     right = numbers.length - 1;
-  while (left <= right) {
+  while (left < right) {
     const sum = numbers[left] + numbers[right];
     if (sum < target) {
       left++;
