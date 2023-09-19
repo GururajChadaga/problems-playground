@@ -1,4 +1,4 @@
-import { nestedArr, nestedObjectUser } from '../../mocks/index.js';
+import { nestedArr, nestedObjectUser } from '../../../mocks/index.js';
 
 const flattenArray = (arr, currentFlattened = []) => {
   let flattenedArr = currentFlattened;
