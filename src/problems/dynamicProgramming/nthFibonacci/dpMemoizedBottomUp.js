@@ -12,8 +12,10 @@ const nthFibDpBottomUp = (n) => {
 
 console.log(nthFibDpBottomUp(n));
 
-// Time: O(n)
-// Space: O(1)
+/*
+  Time: O(n)
+  Space: O(1)
+*/
 const nthFibDpBottomUpSpaceOptimized = (n) => {
   let first = 1;
   let second = 1;
