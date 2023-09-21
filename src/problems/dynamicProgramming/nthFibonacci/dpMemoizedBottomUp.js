@@ -11,3 +11,18 @@ const nthFibDpBottomUp = (n) => {
 };
 
 console.log(nthFibDpBottomUp(n));
+
+// Time: O(n)
+// Space: O(1)
+const nthFibDpBottomUpSpaceOptimized = (n) => {
+  let first = 1;
+  let second = 1;
+  for (let i = 3; i <= n; i++) {
+    const tmp = second;
+    second = first + second;
+    first = tmp;
+  }
+  return second;
+};
+
+console.log(nthFibDpBottomUpSpaceOptimized(10));
