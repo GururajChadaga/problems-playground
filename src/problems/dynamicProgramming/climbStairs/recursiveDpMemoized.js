@@ -8,15 +8,15 @@
   Space: O(n)
 */
 const climb = (start, n, memo) => {
-  if (memo[start - 1]) return memo[start - 1];
+  if (memo[start]) return memo[start];
   let result;
   if (start === n) result = 1;
   else if (start > n) result = 0;
   else result = climb(start + 1, n, memo) + climb(start + 2, n, memo);
-  memo[start - 1] = result;
+  memo[start] = result;
   return result;
 };
 
 const climbStairs = function (n) {
-  return climb(0, n, Array(n));
+  return climb(0, n, Array(n+1));
 };
