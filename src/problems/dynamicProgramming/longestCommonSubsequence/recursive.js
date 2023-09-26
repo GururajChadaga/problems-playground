@@ -9,7 +9,7 @@
     where n is lenght of text1, m is length of text2
   Space: O(m + n)
     O(1) for logic
-    O(m + n) for auxiallary stack space for recursion call.
+    O(m + n) for auxiliary stack space for recursion call.
       recursion depth is m + n
 */
 const getLCS = (text1, text2, text1Index, text2Index) => {
