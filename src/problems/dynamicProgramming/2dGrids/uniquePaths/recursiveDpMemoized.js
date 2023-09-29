@@ -9,7 +9,7 @@ Time: O(m*n)
   number of states calculated.
 
 Space: O((m-1 + (n-1)) + O(mxn)
-  O((m-1 + (n-1)) auxiliary stack space for recustion call
+  O((m-1 + (n-1)) auxiliary stack space for recustion call or the path length
   O(mxn) for memo
 */
 const checkPaths = (m, n, row, col, memo) => {
