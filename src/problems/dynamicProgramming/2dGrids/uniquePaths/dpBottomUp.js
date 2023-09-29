@@ -31,7 +31,7 @@ Time: O(m * n)
   nested loop
 
 Space: O(n)
-  for prevDownArray. we reduced SC from O(m * n) to O(n)
+  for prevDown Array. we reduced SC from O(m * n) to O(n)
 */
 const uniquePathsSpaceOptimized = function (m, n) {
   let prevDown = new Array(n).fill(0);

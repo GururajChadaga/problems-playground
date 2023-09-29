@@ -5,8 +5,8 @@
  */
 
 /*
-Time: O(m*n) exponential
-  2 choices at each step: right, down
+Time: O(m*n) 
+  number of states calculated.
 
 Space: O((m-1 + (n-1)) + O(mxn)
   O((m-1 + (n-1)) auxiliary stack space for recustion call
