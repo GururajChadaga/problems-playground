@@ -2,7 +2,7 @@
  * @param {number} n - a positive integer
  * @return {number} - a positive integer
  */
-var reverseBits = function (n) {
+const reverseBits = function (n) {
   let reversed = 0,
     shiftLeftBy = 31;
   while (n) {
