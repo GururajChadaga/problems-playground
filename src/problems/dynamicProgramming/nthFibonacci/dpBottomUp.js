@@ -1,13 +1,13 @@
 // Time: O(n)
 // Space: O(n)
 const nthFibDpBottomUp = (n) => {
-  const memo = Array(n + 1);
-  memo[1] = 1;
-  memo[2] = 1;
+  const dp = Array(n + 1);
+  dp[1] = 1;
+  dp[2] = 1;
   for (let i = 3; i <= n; i++) {
-    memo[i] = memo[i - 1] + memo[i - 2];
+    dp[i] = dp[i - 1] + dp[i - 2];
   }
-  return memo[n];
+  return dp[n];
 };
 
 console.log(nthFibDpBottomUp(n));

@@ -5,19 +5,19 @@
 
 /*
   Time: O(n) for loop
-  Space O(n) for memo
+  Space O(n) for dp
  */
 const rob = function (nums) {
-  const memo = new Array(nums.length).fill(0);
-  memo[nums.length - 1] = nums[nums.length - 1];
+  const dp = new Array(nums.length).fill(0);
+  dp[nums.length - 1] = nums[nums.length - 1];
   for (let i = nums.length - 2; i >= 0; i--) {
     let pickHouse = nums[i];
-    if (i <= nums.length - 3) pickHouse += memo[i + 2];
+    if (i <= nums.length - 3) pickHouse += dp[i + 2];
     let discardHouse = 0;
-    if (i <= nums.length - 2) discardHouse += memo[i + 1];
-    memo[i] = Math.max(pickHouse, discardHouse);
+    if (i <= nums.length - 2) discardHouse += dp[i + 1];
+    dp[i] = Math.max(pickHouse, discardHouse);
   }
-  return memo[0];
+  return dp[0];
 };
 
 /*
