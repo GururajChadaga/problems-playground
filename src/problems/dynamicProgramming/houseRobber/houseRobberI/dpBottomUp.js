@@ -4,38 +4,38 @@
  */
 
 /*
-  Time: O(n) for loop
-  Space O(n) for dp
+  Time: O(n)
+    loop
+  Space O(n)
+    dp array
  */
-const rob = function (nums) {
-  const dp = new Array(nums.length).fill(0);
-  dp[nums.length - 1] = nums[nums.length - 1];
-  for (let i = nums.length - 2; i >= 0; i--) {
-    let pickHouse = nums[i];
-    if (i <= nums.length - 3) pickHouse += dp[i + 2];
-    let discardHouse = 0;
-    if (i <= nums.length - 2) discardHouse += dp[i + 1];
-    dp[i] = Math.max(pickHouse, discardHouse);
+const rob = function (houses) {
+  const dp = new Array(houses.length + 1).fill(-1);
+  dp[houses.length] = 0;
+  dp[houses.length - 1] = houses[houses.length - 1];
+
+  for (let houseNumber = houses.length - 2; houseNumber >= 0; houseNumber--) {
+    dp[houseNumber] = Math.max(
+      houses[houseNumber] + dp[houseNumber + 2],
+      dp[houseNumber + 1]
+    );
   }
   return dp[0];
 };
 
 /*
-  Time: O(n) for loop
+  Time: O(n)
+    loop
   Space O(1)
  */
-const robSpaceOptimized = function (nums) {
-  let next = nums[nums.length - 1],
-    next2 = 0,
-    curr = nums[nums.length - 2];
-  for (let i = nums.length - 2; i >= 0; i--) {
-    const pickHouse = nums[i] + next2;
-    let discardHouse = 0 + next;
-    curr = Math.max(pickHouse, discardHouse);
-    const tmpCurr = curr;
-    const tmpNext = next;
-    next = tmpCurr;
-    next2 = tmpNext;
+const robSpaceOptimized = function (houses) {
+  let next = houses[houses.length - 1],
+    next2 = 0;
+
+  for (let houseNumber = houses.length - 2; houseNumber >= 0; houseNumber--) {
+    const curr = Math.max(houses[houseNumber] + next2, next);
+    next2 = next;
+    next = curr;
   }
-  return nums.length === 1 ? nums[0] : curr;
+  return next;
 };

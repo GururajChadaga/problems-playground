@@ -2,15 +2,17 @@
  * @param {number[]} height
  * @return {number}
  */
-const containerWithMostWater = function (height) {
+const maxArea = function (heights) {
   let left = 0,
-    right = height.length - 1,
+    right = heights.length - 1,
     maxArea = 0;
   while (left < right) {
-    const area = (right - left) * Math.min(height[left], height[right]);
-    maxArea = Math.max(area, maxArea);
-    if (height[left] < height[right]) left++;
-    else if (height[left] > height[right]) right--;
+    const leftHeight = heights[left],
+      rightHeight = heights[right],
+      area = (right - left) * Math.min(leftHeight, rightHeight);
+    maxArea = Math.max(maxArea, area);
+    if (leftHeight < rightHeight) left++;
+    else if (leftHeight > rightHeight) right--;
     else {
       left++;
       right--;

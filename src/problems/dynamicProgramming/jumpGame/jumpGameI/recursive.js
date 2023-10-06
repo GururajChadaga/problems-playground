@@ -11,15 +11,17 @@
       decisions applied on n elements
   Space O(n) for auxiliary stack space for recursion
  */
-const jump = (nums, index) => {
-  if (index >= nums.length) return false;
-  else if (index === nums.length - 1) return true;
-  let isMatch = false;
+const checkJumps = (nums, index) => {
+  if (index === nums.length - 1) return true;
+  else if (index >= nums.length) return false;
+
+  let canJump = false;
   for (let i = 1; i <= nums[index]; i++) {
-    isMatch ||= jump(nums, index + i);
+    canJump ||= checkJumps(nums, index + i);
   }
-  return isMatch;
+  return canJump;
 };
+
 const canJump = function (nums) {
-  return jump(nums, 0);
+  return checkJumps(nums, 0);
 };

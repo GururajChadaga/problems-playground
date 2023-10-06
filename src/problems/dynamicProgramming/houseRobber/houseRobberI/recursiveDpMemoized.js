@@ -3,24 +3,23 @@
  * @return {number}
  */
 /*
-  Time: O(n) 
+  Time: O(n)
+    number of states stored = number of houses
   Space O(n) + O(n): 
     O(n) for auxiliary stack space for recursion with depth of n 
     O(n) for memo
  */
-const exploreHouses = (index, nums, memo) => {
-  if (index === nums.length - 1) return nums[index];
-  if (index >= nums.length) return 0;
+const exploreHouses = (houses, houseNumber, memo) => {
+  if (houseNumber === houses.length - 1) return houses[houseNumber];
+  if (houseNumber >= houses.length) return 0;
 
-  if (memo[index] !== -1) return memo[index];
-  let res = Math.max(
-    nums[index] + exploreHouses(index + 2, nums, memo), // pick current house
-    0 + exploreHouses(index + 1, nums, memo) // don't pick current house
-  );
-  memo[index] = res;
-  return res;
+  if (memo[houseNumber] !== -1) return memo[houseNumber];
+  return (memo[houseNumber] = Math.max(
+    houses[houseNumber] + exploreHouses(houses, houseNumber + 2, memo), //pick current house, skip next house
+    exploreHouses(houses, houseNumber + 1, memo) //dont pick current house, proceed to next house
+  ));
 };
-const rob = function (nums) {
-  const memo = new Array(nums.length).fill(-1);
-  return exploreHouses(0, nums, memo);
+const rob = function (houses) {
+  const memo = new Array(houses.length).fill(-1);
+  return exploreHouses(houses, 0, memo);
 };

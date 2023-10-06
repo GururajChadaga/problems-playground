@@ -2,21 +2,27 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+/*
+  Time: O(n)
+    loop
+  Space: O(1)
+ */
 const maxSubArray = function (nums) {
-  let currentSum = 0,
-    maxSum = -Infinity,
-    allNegativeNumbers = true,
+  let maxSum = 0,
+    currTotalSum = 0,
+    isAllNegative = true,
     maxNum = -Infinity;
-  for (let value of nums) {
-    currentSum += value;
-    if (currentSum < 0) {
-      currentSum = 0;
+  for (let num of nums) {
+    maxNum = Math.max(maxNum, num);
+    if (num >= 0) {
+      currTotalSum += num;
+      isAllNegative = false;
+    } else {
+      if (currTotalSum + num >= 0) currTotalSum += num;
+      else currTotalSum = 0;
     }
-    maxSum = Math.max(maxSum, currentSum);
-    if (allNegativeNumbers && value > 0) {
-      allNegativeNumbers = false;
-    }
-    maxNum = Math.max(maxNum, value);
+    maxSum = Math.max(maxSum, currTotalSum);
   }
-  return allNegativeNumbers ? maxNum : maxSum;
+  return isAllNegative ? maxNum : maxSum;
 };

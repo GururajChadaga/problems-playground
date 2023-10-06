@@ -12,15 +12,12 @@ Space: O(m * n)
   2D dp array
 */
 const uniquePaths = function (m, n) {
-  const dp = new Array(m).fill(-1).map(() => new Array(n).fill(-1));
-  for (let row = m - 1; row >= 0; row--) {
-    for (let col = n - 1; col >= 0; col--) {
-      if (row === m - 1 && col === n - 1) dp[row][col] = 1;
-      else {
-        const right = col <= n - 2 ? dp[row][col + 1] : 0;
-        const down = row <= m - 2 ? dp[row + 1][col] : 0;
-        dp[row][col] = right + down;
-      }
+  const dp = new Array(m + 1).fill(-1).map(() => new Array(n + 1).fill(-1));
+  for (let row = m; row >= 0; row--) {
+    for (let col = n; col >= 0; col--) {
+      if (row === m || col === n) dp[row][col] = 0;
+      else if (row === m - 1 && col === n - 1) dp[row][col] = 1;
+      else dp[row][col] = dp[row][col + 1] + dp[row + 1][col];
     }
   }
   return dp[0][0];
@@ -34,16 +31,13 @@ Space: O(n)
   for prevDown Array. we reduced SC from O(m * n) to O(n)
 */
 const uniquePathsSpaceOptimized = function (m, n) {
-  let prevDown = new Array(n).fill(0);
-  for (let row = m - 1; row >= 0; row--) {
-    let curr = new Array(n).fill(0);
-    for (let col = n - 1; col >= 0; col--) {
-      if (row === m - 1 && col === n - 1) curr[col] = 1;
-      else {
-        const right = col <= n - 2 ? curr[col + 1] : 0;
-        const down = row <= m - 2 ? prevDown[col] : 0;
-        curr[col] = right + down;
-      }
+  let prevDown = new Array(n + 1).fill(-1);
+  for (let row = m; row >= 0; row--) {
+    let curr = new Array(n + 1).fill(-1);
+    for (let col = n; col >= 0; col--) {
+      if (row === m || col === n) curr[col] = 0;
+      else if (row === m - 1 && col === n - 1) curr[col] = 1;
+      else curr[col] = curr[col + 1] + prevDown[col];
     }
     prevDown = curr;
   }

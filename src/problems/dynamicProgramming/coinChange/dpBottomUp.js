@@ -6,15 +6,21 @@
  * @return {number}
  */
 
+/*
+  Time: O(n)
+    for loop
+  Space: O(n)
+    for the dp array
+    can't be space optimized as SC will be O(n) if coins.length >= amount
+*/
 const coinChange = function (coins, amount) {
-  const numberOfCoins = Array(amount + 1).fill(Infinity);
-  numberOfCoins[0] = 0;
-  for (let i = 1; i <= amount; i++) {
-    numberOfCoins[i] = Math.min(
-      ...coins.map((coin) => {
-        return i - coin >= 0 ? numberOfCoins[i - coin] + 1 : Infinity;
-      })
-    );
+  const dp = new Array(amount + 1).fill(0);
+  for (let i = amount - 1; i >= 0; i--) {
+    dp[i] =
+      1 +
+      Math.min(
+        ...coins.map((coin) => (i + coin <= amount ? dp[i + coin] : Infinity))
+      );
   }
-  return numberOfCoins[amount] != Infinity ? numberOfCoins[amount] : -1;
+  return dp[0] === Infinity ? -1 : dp[0];
 };

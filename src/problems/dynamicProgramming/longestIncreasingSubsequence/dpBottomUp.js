@@ -15,6 +15,9 @@ const lengthOfLISMemoized = function (nums) {
 
   for (let currIndex = nums.length - 1; currIndex >= 0; currIndex--) {
     for (let prevIndex = currIndex - 1; prevIndex >= -1; prevIndex--) {
+      /* len = dp(i + 1, j), here, j is j+1 as it starts from -1,
+       and we shift the index, to store in the matrix
+       second index of dp array is shift by 1 everywhere */
       let len = 0 + dp[currIndex + 1][prevIndex + 1]; // don't take current element
       if (nums[currIndex] > nums[prevIndex] || prevIndex === -1) {
         len = Math.max(
@@ -38,25 +41,19 @@ const lengthOfLISMemoized = function (nums) {
   Time: O(n*n)
   Space: O(n * 2) -> currDpArr and nextDpArr
  */
-const lengthOfLISSpaceOptimized = function (nums) {
-  let currDpArr = new Array(nums.length + 1).fill(0),
-    nextDpArr = new Array(nums.length + 1).fill(0);
-
+const lengthOfLIS = function (nums) {
+  let prevDown = Array(nums.length + 1).fill(0);
   for (let currIndex = nums.length - 1; currIndex >= 0; currIndex--) {
+    const curr = Array(nums.length + 1).fill(0);
     for (let prevIndex = currIndex - 1; prevIndex >= -1; prevIndex--) {
-      let len = 0 + nextDpArr[prevIndex + 1]; // don't take current element
-      if (nums[currIndex] > nums[prevIndex] || prevIndex === -1) {
-        len = Math.max(
-          len,
-          1 + // take current element
-            nextDpArr[currIndex + 1]
-        );
-      }
-      currDpArr[prevIndex + 1] = len;
+      let len = prevDown[prevIndex + 1];
+      if (nums[currIndex] > nums[prevIndex] || prevIndex === -1)
+        len = Math.max(len, 1 + prevDown[currIndex + 1]);
+      curr[prevIndex + 1] = len;
     }
-    nextDpArr = currDpArr;
+    prevDown = curr;
   }
-  return nextDpArr[0];
+  return prevDown[0];
 };
 
 /*

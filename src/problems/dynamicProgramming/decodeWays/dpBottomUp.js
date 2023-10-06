@@ -8,19 +8,17 @@
   Space O(n) for the dp array
  */
 const numDecodings = function (encoded) {
-  const dp = new Array(encoded.length + 1);
+  const dp = new Array(encoded.length + 2).fill(0);
+  dp[encoded.length + 1] = 0;
   dp[encoded.length] = 1;
-  for (let i = encoded.length - 1; i >= 0; i--) {
-    if (encoded[i] === '0') dp[i] = 0;
+  for (let index = encoded.length - 1; index >= 0; index--) {
+    if (encoded[index] === '0') dp[index] = 0;
     else {
-      dp[i] = dp[i + 1];
-      if (
-        i <= encoded.length - 2 &&
-        (encoded[i] === '1' ||
-          (encoded[i] === '2' &&
-            ['0', '1', '2', '3', '4', '5', '6'].includes(encoded[i + 1])))
-      )
-        dp[i] += dp[i + 2];
+      const takeOneDigit = dp[index + 1],
+        nextTwoDigits = +encoded.substring(index, index + 2),
+        takeTwoDigits = nextTwoDigits <= 26 ? dp[index + 2] : 0;
+
+      dp[index] = takeOneDigit + takeTwoDigits;
     }
   }
   return dp[0];
@@ -31,26 +29,20 @@ const numDecodings = function (encoded) {
   Space O(1)
  */
 const numDecodingsSpaceOptimized = function (encoded) {
-  let next2 = 1,
-    next,
-    curr;
-  next = encoded[encoded.length - 1] === '0' ? 0 : 1;
-  curr = encoded[encoded.length - 1] === '0' ? 0 : 1;
-  for (let i = encoded.length - 2; i >= 0; i--) {
-    if (encoded[i] === '0') curr = 0;
+  let next = 1,
+    next2 = 0;
+  for (let index = encoded.length - 1; index >= 0; index--) {
+    let curr;
+    if (encoded[index] === '0') curr = 0;
     else {
-      curr = next;
-      if (
-        i <= encoded.length - 2 &&
-        (encoded[i] === '1' ||
-          (encoded[i] === '2' &&
-            ['0', '1', '2', '3', '4', '5', '6'].includes(encoded[i + 1])))
-      )
-        curr += next2;
+      const takeOneDigit = next,
+        nextTwoDigits = +encoded.substring(index, index + 2),
+        takeTwoDigits = nextTwoDigits <= 26 ? next2 : 0;
+
+      curr = takeOneDigit + takeTwoDigits;
     }
-    const tmpNext = next;
+    next2 = next;
     next = curr;
-    next2 = tmpNext;
   }
-  return curr;
+  return next;
 };

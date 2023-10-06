@@ -12,6 +12,16 @@ const hammingWeight = function (n) {
   return hammingWeight;
 };
 
+const hammingWeightAlt = function(n) {
+  let hammingWeight = 0
+  while(n){
+    const lastBit = n & 1
+    hammingWeight += lastBit
+    n = n >>> 1
+  }
+  return hammingWeight
+};
+
 /**
  * @param {number} n - a positive integer
  * @return {number}

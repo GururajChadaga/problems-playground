@@ -29,4 +29,23 @@ const longestCommonSubsequence = function (text1, text2) {
   return dp[0][0];
 };
 
-// TODO: Add space optimized bottom up
+/*
+  Time: O(n x m)
+    where n is lenght of text1, m is length of text2
+  Space: O(m)
+    for prevDown arr
+*/
+const longestCommonSubsequenceSpaceOptimized = function (text1, text2) {
+  let prevDown = Array(text2.length + 1).fill(0);
+  for (let text1Index = text1.length - 1; text1Index >= 0; text1Index--) {
+    const curr = Array(text2.length + 1).fill(0);
+    for (let text2Index = text2.length - 1; text2Index >= 0; text2Index--) {
+      if (text1[text1Index] === text2[text2Index])
+        curr[text2Index] = 1 + prevDown[text2Index + 1];
+      else
+        curr[text2Index] = Math.max(prevDown[text2Index], curr[text2Index + 1]);
+    }
+    prevDown = curr;
+  }
+  return prevDown[0];
+};

@@ -5,18 +5,19 @@
 
 /*
   Time: O(n)
+    number of states = n
   Space: O(n)
+    for the memo array
 */
-const climb = (start, n, memo) => {
-  if (memo[start]) return memo[start];
-  let result;
-  if (start === n) result = 1;
-  else if (start > n) result = 0;
-  else result = climb(start + 1, n, memo) + climb(start + 2, n, memo);
-  memo[start] = result;
-  return result;
+const climb = (n, start, memo) => {
+  if (start === n) return 1;
+  else if (start > n) return 0;
+
+  if (memo[start] !== -1) return memo[start];
+  return (memo[start] = climb(n, start + 1, memo) + climb(n, start + 2, memo));
 };
 
 const climbStairs = function (n) {
-  return climb(0, n, Array(n+1));
+  const memo = new Array(n + 1).fill(-1);
+  return climb(n, 0, memo);
 };

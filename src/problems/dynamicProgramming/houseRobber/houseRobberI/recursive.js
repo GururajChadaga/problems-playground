@@ -8,15 +8,15 @@
     2 choices at every stage: pick house, don't pick house, for n houses
   Space O(n): auxiliary stack space for recursion with depth of n 
  */
-const exploreHouses = (index, nums) => {
-  if (index === nums.length - 1) return nums[index];
-  if (index >= nums.length) return 0;
+const exploreHouses = (houses, houseNumber) => {
+  if (houseNumber === houses.length - 1) return houses[houseNumber];
+  if (houseNumber >= houses.length) return 0;
 
   return Math.max(
-    nums[index] + exploreHouses(index + 2, nums), // pick current house
-    0 + exploreHouses(index + 1, nums) // don't pick current house
+    houses[houseNumber] + exploreHouses(houses, houseNumber + 2), //pick current house, skip next house
+    exploreHouses(houses, houseNumber + 1) //dont pick current house, proceed to next house
   );
 };
-const rob = function (nums) {
-  return exploreHouses(0, nums);
+const rob = function (houses) {
+  return exploreHouses(houses, 0);
 };

@@ -12,12 +12,15 @@
 const wordBreak = function (text, dict) {
   const dp = new Array(text.length + 1).fill(false);
   dp[text.length] = true;
-  for (let index = text.length - 1; index >= 0; index--) {
-    for (let dictWord of dict) {
-      if (text.substring(index, index + dictWord.length) === dictWord)
-        dp[index] = dp[index + dictWord.length];
-      if (dp[index]) break;
-    }
+  for (let i = text.length - 1; i >= 0; i--) {
+    dict.forEach((dictWord) => {
+      if (text.substring(i, i + dictWord.length) === dictWord) {
+        // prevent override an existing true with a possible future false
+        if (dp[i]) return;
+        dp[i] = dp[i + dictWord.length];
+        console.log(text, dictWord, i, dp);
+      }
+    });
   }
   return dp[0];
 };

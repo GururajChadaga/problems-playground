@@ -5,9 +5,9 @@
  */
 const getSum = function (a, b) {
   while (b != 0) {
-    const tmp = (a & b) << 1;
+    const carry = (a & b) << 1;
     a = a ^ b;
-    b = tmp;
+    b = carry;
   }
   return a;
 };

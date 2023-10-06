@@ -11,15 +11,17 @@
       decisions applied on n elements
   Space O(n) for auxiliary stack space for recursion
  */
-const checkJumps = (nums, index, jumpCount) => {
-  if (index === nums.length - 1) return jumpCount;
-  if (index >= nums.length) return Infinity;
-  let jumps = Infinity;
+const checkJumps = (nums, index) => {
+  if (index === nums.length - 1) return 0;
+  else if (index >= nums.length) return Infinity;
+
+  let jumpCount = Infinity;
   for (let i = 1; i <= nums[index]; i++) {
-    jumps = Math.min(jumps, checkJumps(nums, index + i, jumpCount + 1));
+    jumpCount = Math.min(jumpCount, checkJumps(nums, index + i));
   }
-  return jumps;
+  return ++jumpCount;
 };
+
 const jump = function (nums) {
-  return checkJumps(nums, 0, 0);
+  return checkJumps(nums, 0);
 };

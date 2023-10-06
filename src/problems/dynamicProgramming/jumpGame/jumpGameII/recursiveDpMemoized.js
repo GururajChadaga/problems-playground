@@ -10,20 +10,19 @@
     O(n) for memo
     O(n) for auxiliary stack space for recursion
  */
-const checkJumps = (nums, index, memo, jumpCount) => {
-  if (index === nums.length - 1) return jumpCount;
-  if (index >= nums.length) return 0;
-  if (memo[index] !== -1) return memo[index];
+const checkJumps = (nums, index, memo) => {
+  if (index === nums.length - 1) return 0;
+  else if (index >= nums.length) return Infinity;
 
-  let jumps = Infinity;
+  if (memo[index] !== -1) return memo[index];
+  let jumpCount = Infinity;
   for (let i = 1; i <= nums[index]; i++) {
-    const abc = checkJumps(nums, index + i, memo, jumpCount);
-    jumps = Math.min(jumps, abc);
+    jumpCount = Math.min(jumpCount, checkJumps(nums, index + i, memo));
   }
-  memo[index] = jumps + 1;
-  return jumps + 1;
+  return (memo[index] = ++jumpCount);
 };
+
 const jump = function (nums) {
-  const memo = new Array(nums.length + 1).fill(-1);
-  return checkJumps(nums, 0, memo, 0);
+  const memo = new Array(nums.length).fill(-1);
+  return checkJumps(nums, 0, memo);
 };

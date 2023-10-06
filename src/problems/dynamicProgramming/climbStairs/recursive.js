@@ -4,15 +4,16 @@
  */
 
 /*
-  Time: O(2^n)
+  Time: O(2^n) exponential
+    2 decisions at every step: +1 or +2
   Space: O(1)
 */
-const climb = (start, n) => {
+const climb = (n, start) => {
   if (start === n) return 1;
-  if (start > n) return 0;
-  return climb(start + 1, n) + climb(start + 2, n);
+  else if (start > n) return 0;
+  return climb(n, start + 1) + climb(n, start + 2);
 };
 
 const climbStairs = function (n) {
-  return climb(0, n);
+  return climb(n, 0);
 };
