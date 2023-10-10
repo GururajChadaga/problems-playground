@@ -27,6 +27,7 @@ const spiralOrder = function (matrix) {
     right--;
 
     if (top <= bottom) {
+      // if rows are remaining
       for (let i = right; i >= left; i--) {
         spiral.push(matrix[bottom][i]);
       }
@@ -34,6 +35,7 @@ const spiralOrder = function (matrix) {
     }
 
     if (left <= right) {
+      // if cols are remaining
       for (let i = bottom; i >= top; i--) {
         spiral.push(matrix[i][left]);
       }
