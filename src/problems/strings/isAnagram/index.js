@@ -9,7 +9,7 @@
     n = s.length = t.length
   Space: O(n)
  */
-const isAnagram = function (s, t) {
+export const isAnagram = function (s, t) {
   let sFreqMap = {},
     tFreqMap = {};
   if (s.length !== t.length) return false;
@@ -30,6 +30,6 @@ const isAnagram = function (s, t) {
     logn to sort
   Space: O(1) or O(n) based on which sort is implemented
  */
-const isAnagramalt = function (s, t) {
+export const isAnagramalt = function (s, t) {
   return s.split('').sort().join('') === t.split('').sort().join('');
 };
