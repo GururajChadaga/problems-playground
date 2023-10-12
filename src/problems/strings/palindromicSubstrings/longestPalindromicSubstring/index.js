@@ -5,7 +5,8 @@
 
 /*
   Time: O(n^2)
-    n = s.length = t.length
+    n for checking each character in the string
+    for each of those characters, left and right traverse the entire string
   Space: O(1)
 */
 const longestPalindrome = function (s) {
