@@ -1,3 +1,7 @@
 "strs:", ["apple", "4oranges", "#85fives"]
 "encoded:", "5apple84oranges8#85fives"
 "decoded:", ["apple", "4oranges", "#85fives"]
+
+"strs: 1,22,333,4444,55555,666666"
+"encoded: 112223333444445555556666666"
+"decoded: 1,22,333,4444,55555,666666"

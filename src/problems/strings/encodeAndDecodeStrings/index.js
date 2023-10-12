@@ -1,5 +1,8 @@
 const strs = ['apple', '4oranges', '#85fives'];
-
+/*
+  Time: O(n)
+  Space: O(1)
+ */
 const encode = (strs) => {
   return strs.reduce((acc, str) => `${acc}${str.length}${str}`, '');
 };
