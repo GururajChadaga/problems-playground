@@ -1,0 +1,3 @@
+"strs:", ["apple", "4oranges", "#85fives"]
+"encoded:", "5apple84oranges8#85fives"
+"decoded:", ["apple", "4oranges", "#85fives"]
