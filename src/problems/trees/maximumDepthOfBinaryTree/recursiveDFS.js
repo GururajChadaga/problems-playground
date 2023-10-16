@@ -12,7 +12,7 @@
  */
 
 /*
-  Time; O(n)
+  Time: O(n)
   Space: O(1) + O(n)
     O(n) for auxiliary stack space for recursive calls
 */
