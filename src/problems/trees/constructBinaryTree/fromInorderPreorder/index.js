@@ -17,13 +17,16 @@ const buildTree = (preorder, inorder) => {
     return;
 
   const root = preorder[0];
-  const inorderRoot = inorder.indexOf(root);
+  const inorderRootIndex = inorder.indexOf(root);
   return new TreeNode(
     root,
     buildTree(
-      preorder.slice(1, inorderRoot + 1),
-      inorder.slice(0, inorderRoot)
+      preorder.slice(1, inorderRootIndex + 1),
+      inorder.slice(0, inorderRootIndex)
     ),
-    buildTree(preorder.slice(1 + inorderRoot), inorder.slice(inorderRoot + 1))
+    buildTree(
+      preorder.slice(1 + inorderRootIndex),
+      inorder.slice(inorderRootIndex + 1)
+    )
   );
 };
