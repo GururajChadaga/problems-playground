@@ -1,31 +1,28 @@
-class Node {
-  constructor() {
-    this.children = new Map();
-    this.isEnd = false;
-    this.hasChild = function (child) {
-      return this.children.has(child);
-    };
-    this.getChildNode = function (child) {
-      return this.children.get(child);
-    };
-    this.setChildNode = function (child) {
-      this.children.set(child, new Node());
-    };
+const Node = function () {
+  this.children = new Map();
+  this.isEnd = false;
 
-    this.getIsEnd = function () {
-      return this.isEnd;
-    };
-    this.setIsEnd = function (isEnd) {
-      this.isEnd = isEnd;
-    };
-  }
-}
+  this.hasChild = function (child) {
+    return this.children.has(child);
+  };
+  this.getChildNode = function (child) {
+    return this.children.get(child);
+  };
+  this.setChildNode = function (child) {
+    this.children.set(child, new Node());
+  };
 
-class Trie {
-  constructor() {
-    this.node = new Node();
-  }
-}
+  this.getIsEnd = function () {
+    return this.isEnd;
+  };
+  this.setIsEnd = function (isEnd) {
+    this.isEnd = isEnd;
+  };
+};
+
+const Trie = function () {
+  this.node = new Node();
+};
 
 /**
  * @param {string} word
@@ -60,7 +57,7 @@ Trie.prototype.search = function (word) {
 Trie.prototype.startsWith = function (prefix) {
   let curr = this.node;
   for (let char of prefix) {
-    if (!curr.children.has(char)) return false;
+    if (!curr.hasChild(char)) return false;
     else curr = curr.getChildNode(char);
   }
   return true;
