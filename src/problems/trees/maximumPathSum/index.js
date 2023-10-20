@@ -10,6 +10,14 @@
  * @param {TreeNode} root
  * @return {number}
  */
+
+/*
+  Time: O(H)
+    H is the height of the BST
+    average: H = logn
+  Space: O(H)
+    recursive stack space
+ */
 const maxPathSum = function (root) {
   let maxPathSum = -Infinity;
 
