@@ -12,6 +12,11 @@
  * @param {TreeNode} root
  * @return {string}
  */
+
+/*
+  Time: O(n)
+  Space: O(n)
+ */
 const serialize = function (root) {
   const dfs = (node) => {
     if (!node) return '#';
@@ -25,6 +30,11 @@ const serialize = function (root) {
  *
  * @param {string} data
  * @return {TreeNode}
+ */
+
+/*
+  Time: O(n)
+  Space: O(n)
  */
 const deserialize = function (data) {
   const serialized = data.split(',');
