@@ -3,13 +3,23 @@
  * @param {number} target
  * @return {number[]}
  */
-const twoSumII = function (numbers, target) {
+
+/*
+  Time: O(n)
+    loop
+  Space: O(1)
+ */
+const twoSumII = function (nums, target) {
   let left = 0,
-    right = numbers.length - 1;
+    right = nums.length - 1;
   while (left < right) {
-    const sum = numbers[left] + numbers[right];
-    if (sum > target) right--;
-    else if (sum < target) left++;
-    else return [left + 1, right + 1];
+    const sum = nums[left] + nums[right];
+    if (sum < target) {
+      left++;
+    } else if (sum > target) {
+      right--;
+    } else {
+      return [++left, ++right];
+    }
   }
 };

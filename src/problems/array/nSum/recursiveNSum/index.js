@@ -4,18 +4,24 @@
  * @return {number[][]}
  */
 
+/*
+  Time: O(n^m-1)
+    where m is the mSum
+    loop
+  Space: O(1) + recursive stack space
+ */
 const anySum = function (nums, target) {
   nums.sort((a, b) => a - b);
-  const quad = [],
+  const currNums = [],
     ans = [];
 
-  const nSum = (n, start, target) => {
+  const mSum = (n, start, targetSum) => {
     if (n != 2) {
-      for (let i = start; i < nums.length - n + 1; i++) {
+      for (let i = start; i < nums.length; i++) {
         if (i != start && nums[i] === nums[i - 1]) continue;
-        quad.push(nums[i]);
-        nSum(n - 1, i + 1, target - nums[i]);
-        quad.pop();
+        currNums.push(nums[i]);
+        mSum(n - 1, i + 1, targetSum - nums[i]);
+        currNums.pop();
       }
       return;
     }
@@ -24,12 +30,12 @@ const anySum = function (nums, target) {
       right = nums.length - 1;
     while (left < right) {
       const sum = nums[left] + nums[right];
-      if (sum < target) {
+      if (sum < targetSum) {
         left++;
-      } else if (sum > target) {
+      } else if (sum > targetSum) {
         right--;
       } else {
-        ans.push([...quad, nums[left], nums[right]]);
+        ans.push([...currNums, nums[left], nums[right]]);
         left++;
         right--;
         while (nums[left] === nums[left - 1] && left < right) left++;
@@ -37,6 +43,6 @@ const anySum = function (nums, target) {
       }
     }
   };
-  nSum(4, 0, target);
+  mSum(4, 0, target);
   return ans;
 };

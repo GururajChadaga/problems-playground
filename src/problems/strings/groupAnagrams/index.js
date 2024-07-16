@@ -23,7 +23,6 @@ const groupAnagrams = function (strs) {
 const groupAnagramsUsingMap = function (strs) {
   const groupedAnagrams = new Map();
   for (let str of strs) {
-    const count = new Array(26).fill(0);
     const sortedStr = str.split('').sort().join('');
     const groupedArr = groupedAnagrams.get(sortedStr);
     const updatedGroupedArr = groupedArr ? [...groupedArr, str] : [str];

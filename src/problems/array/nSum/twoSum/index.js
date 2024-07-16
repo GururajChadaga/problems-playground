@@ -11,11 +11,13 @@
     currentElementsMap map
  */
 const twoSum = function (nums, target) {
-  const currentElementsMap = new Map();
-  for (const [index, num] of Object.entries(nums)) {
+  const currentElementsMap = {};
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
     const diff = target - num;
-    if (currentElementsMap.has(diff))
-      return [currentElementsMap.get(diff), index];
-    currentElementsMap.set(num, index);
+    if (Object.hasOwn(currentElementsMap, diff)) {
+      return [currentElementsMap[diff], i];
+    }
+    currentElementsMap[num] = i;
   }
 };

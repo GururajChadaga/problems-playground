@@ -6,7 +6,7 @@
 /*
   Time: O(n)
     loop
-  Space: O(2*n)
+  Space: O(2n)
     prefixProdExceptSelf and SuffixProdExceptSelf arrays
 */
 const getPrefixAndSuffixProdExcepSelf = (arr) => {

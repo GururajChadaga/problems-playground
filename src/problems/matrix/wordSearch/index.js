@@ -33,8 +33,8 @@ const exist = function (board, word) {
       dfs(row, col + 1, wordIndex + 1) ||
       dfs(row - 1, col, wordIndex + 1) ||
       dfs(row + 1, col, wordIndex + 1);
-
     currentPath.delete(coords);
+
     return res;
   };
 
